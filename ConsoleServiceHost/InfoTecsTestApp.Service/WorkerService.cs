@@ -60,7 +60,7 @@ namespace InfoTecsTestApp.Service
         {
             if (worker.Cost <= 0)
                 throw new Exception("Зарплата должна быть больше 0");
-            if (workerRepository.GetAll().Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))
+            if (workerRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))
                 throw new Exception("Пользователь с таким именем уже существует");
             if (string.IsNullOrWhiteSpace(worker.Specialty))
                 throw new Exception("Специальность не заполнена");

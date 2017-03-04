@@ -57,9 +57,9 @@ namespace InfoTecsTestApp.DAL.Infrastructure
         {
             return dbset.Find(id);
         }
-        public virtual IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll(bool noTracking = false)
         {
-            return dbset.ToList();
+            return noTracking ? dbset.AsNoTracking().ToList() : dbset.ToList();
         }
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)

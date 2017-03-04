@@ -14,7 +14,7 @@ namespace InfoTecsTestApp.DAL.Infrastructure
         T GetById(string id);
         T GetById(Guid id);
         T Get(Expression<Func<T, bool>> where);
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(bool noTracking = false);
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
     }
 }
