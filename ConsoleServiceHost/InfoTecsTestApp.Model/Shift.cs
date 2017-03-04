@@ -11,6 +11,6 @@ namespace InfoTecsTestApp.Model
         public Guid ShiftId { get; set; }
         public virtual WorkerObject WorkerObject { set; get; }
         public virtual ICollection<Worker> Workers { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime ShiftDate { get; set; }
     }
 }

@@ -61,14 +61,17 @@ namespace ConsoleServiceHost
 
         private static ContainerBuilder ConfigureBuilder()
         {
-            ContainerBuilder builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();
             builder.RegisterType<DatabaseFactory>().As<IDatabaseFactory>().InstancePerLifetimeScope();
             builder.RegisterType<WorkerRepository>().As<IWorkerRepository>().InstancePerLifetimeScope();
             builder.RegisterType<WorkerObjectRepository>().As<IWorkerObjectRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ShiftRepository>().As<IShiftRepository>().InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<WorkerService>().As<IWorkerService>().InstancePerLifetimeScope();
             builder.RegisterType<WorkerObjectService>().As<IWorkerObjectService>().InstancePerLifetimeScope();
+            builder.RegisterType<ShiftService>().As<IShiftService>();
             builder.RegisterType<WorkerWcfService>().As<IWorkerWcfService>();
+            
             return builder;
         }
     }

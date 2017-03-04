@@ -116,6 +116,9 @@
     <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.WorkerObject.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.Shift.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\WorkerServiceReference\WorkerService.disco" />
     <None Include="Service References\WorkerServiceReference\configuration91.svcinfo" />
     <None Include="Service References\WorkerServiceReference\configuration.svcinfo" />
@@ -164,6 +167,7 @@
     </None>
     <Content Include="Views\Worker\_WorkersPartial.cshtml" />
     <Content Include="Views\Worker\_WorkersObjectsPartial.cshtml" />
+    <Content Include="Views\Worker\_WorkerShiftsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

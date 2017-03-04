@@ -12,54 +12,75 @@ using InfoTecsTestApp.Service;
 namespace WCFService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "WorkerService" in both code and config file together.
-    public class WorkerWcfService : IWorkerWcfService //: IWorkerWCFService
+    public class WorkerWcfService : IWorkerWcfService  //:: IWorkerWcfService IWorkerWCFService
     {
         private readonly IWorkerService _workerService;
         private readonly IWorkerObjectService _workerObjectService;
-        public WorkerWcfService(IWorkerService workerService, IWorkerObjectService workerObjectService)
+        private readonly IShiftService _shiftService;
+        public WorkerWcfService(IWorkerService workerService, IWorkerObjectService workerObjectService, IShiftService shiftService)
         {
             _workerService = workerService;
             _workerObjectService = workerObjectService;
+            _shiftService = shiftService;
         }
         
         public IEnumerable<Worker> GetWorkers()
         {
-            return _workerService.GetWorkers();
+            return _workerService.GetAll();
         }
 
         public void CreateWorker(Worker worker)
         {
-            _workerService.CreateWorker(worker);
+            _workerService.Create(worker);
         }
 
         public void UpdateWorker(Worker worker)
         {
-            _workerService.UpdateWorker(worker);
+            _workerService.Update(worker);
         }
         public void DeleteWorker(Guid workerId)
         {
-            _workerService.DeleteWorker(workerId);
+            _workerService.Delete(workerId);
         }
 
         public IEnumerable<WorkerObject> GetWorkerObjects()
         {
-            return _workerObjectService.GetWorkerObjects(); ;
+            return _workerObjectService.GetAll(); ;
         }
 
         public void CreateWorkerObject(WorkerObject workerObject)
         {
             workerObject.WorkerObjectId = Guid.NewGuid();
-            _workerObjectService.CreateWorkerObject(workerObject);
+            _workerObjectService.Create(workerObject);
         }
 
         public void UpdateWorkerObject(WorkerObject workerObject)
         {
-            _workerObjectService.UpdateWorkerObject(workerObject);
+            _workerObjectService.Update(workerObject);
         }
 
         public void DeleteWorkerObject(Guid workerObjectId)
         {
-            _workerObjectService.DeleteWorkerObject(workerObjectId);
+            _workerObjectService.Delete(workerObjectId);
+        }
+
+        public IEnumerable<Shift> GetShifts()
+        {
+            return _shiftService.GetAll();
+        }
+
+        public void CreateShift(Shift shift)
+        {
+            _shiftService.Create(shift);
+        }
+
+        public void UpdateShift(Shift shift)
+        {
+            _shiftService.Update(shift);
+        }
+        public void DeleteShift(Guid shiftId)
+        {
+            _shiftService.Delete(shiftId);
         }
     }
 }

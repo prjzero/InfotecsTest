@@ -36,27 +36,24 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult UpdateWorker(Worker worker)
         {
-            try
+            return GetStatusResult(() =>
             {
                 if (worker.WorkerId.Equals(Guid.Empty))
                     _workerService.CreateWorker(worker);
                 else
                     _workerService.UpdateWorker(worker);
-            }
-            catch (Exception exception)
-            {
-                return Json(new { Status = "Error", Message = exception.Message });
-            }
-
-            return Json(new { Status = "OK" });
+            });
         }
+
         [HttpPost]
         public ActionResult DeleteWorker(string workerId)
         {
-            Guid workerIdGuid;
-            if (Guid.TryParse(workerId, out workerIdGuid))
-                _workerService.DeleteWorker(workerIdGuid);
-            return Json("CreateWorkers");
+            return GetStatusResult(() =>
+            {
+                Guid workerIdGuid;
+                if (Guid.TryParse(workerId, out workerIdGuid))
+                    _workerService.DeleteWorker(workerIdGuid);
+            });
         }
 
 
@@ -75,35 +72,44 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult UpdateWorkerObject(WorkerObject workerObject)
         {
-            try
+            return GetStatusResult(() =>
             {
                 if (workerObject.WorkerObjectId.Equals(Guid.Empty))
                     _workerService.CreateWorkerObject(workerObject);
                 else
                     _workerService.UpdateWorkerObject(workerObject);
+            });
+        }
+        [HttpPost]
+        public ActionResult DeleteWorkerObject(string workerObjectId)
+        {
+            return GetStatusResult(() =>
+            {
+                Guid workerObjectIdGuid;
+                if (Guid.TryParse(workerObjectId, out workerObjectIdGuid))
+                    _workerService.DeleteWorkerObject(workerObjectIdGuid);
+            });
+        }
+
+        public ActionResult WorkerShifts()
+        {
+            var result = _workerService.GetShifts();
+            return View(result);
+        }
+
+        private ActionResult GetStatusResult(Action process)
+        {
+            try
+            {
+                process();
             }
             catch (Exception exception)
             {
                 return Json(new { Status = "Error", Message = exception.Message });
             }
-            
+
             return Json(new { Status = "OK" });
         }
-        [HttpPost]
-        public ActionResult DeleteWorkerObject(string workerObjectId)
-        {
-            Guid workerObjectIdGuid;
-            if (Guid.TryParse(workerObjectId, out workerObjectIdGuid))
-                _workerService.DeleteWorkerObject(workerObjectIdGuid);
-            return Json("CreateWorkers");
-        }
 
-        public ActionResult WorkerShifts()
-        {
-            return View();
-        }
-
-
-        
     }
 }

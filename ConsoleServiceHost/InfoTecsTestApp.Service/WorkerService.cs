@@ -11,56 +11,56 @@ namespace InfoTecsTestApp.Service
 {
     public class WorkerService : IWorkerService
     {
-        private readonly IWorkerRepository workerRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkerRepository _workerRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public WorkerService(IWorkerRepository workerRepository, IUnitOfWork unitOfWork)
         {
-            this.workerRepository = workerRepository;
-            this.unitOfWork = unitOfWork;
+            this._workerRepository = workerRepository;
+            this._unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Worker> GetWorkers()
+        public IEnumerable<Worker> GetAll()
         {
-            return workerRepository.GetAll();
+            return _workerRepository.GetAll();
         }
 
-        public Worker GetWorker(Guid workerId)
+        public Worker Get(Guid workerId)
         {
-            return workerRepository.GetById(workerId);
+            return _workerRepository.GetById(workerId);
         }
 
-        public void DeleteWorker(Guid workerId)
+        public void Delete(Guid workerId)
         {
-            workerRepository.Delete(worker => worker.WorkerId == workerId);
-            SaveWorker();
+            _workerRepository.Delete(worker => worker.WorkerId == workerId);
+            Save();
         }
 
-        public void CreateWorker(Worker worker)
+        public void Create(Worker worker)
         {
             ValidateWorker(worker);
             worker.WorkerId = Guid.NewGuid();
-            workerRepository.Add(worker);
-            SaveWorker();
+            _workerRepository.Add(worker);
+            Save();
         }
 
-        public void UpdateWorker(Worker worker)
+        public void Update(Worker worker)
         {
             ValidateWorker(worker);
-            workerRepository.Update(worker);
-            SaveWorker();
+            _workerRepository.Update(worker);
+            Save();
         }
 
-        public void SaveWorker()
+        public void Save()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         private void ValidateWorker(Worker worker)
         {
             if (worker.Cost <= 0)
                 throw new Exception("Зарплата должна быть больше 0");
-            if (workerRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))
+            if (_workerRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))
                 throw new Exception("Пользователь с таким именем уже существует");
             if (string.IsNullOrWhiteSpace(worker.Specialty))
                 throw new Exception("Специальность не заполнена");

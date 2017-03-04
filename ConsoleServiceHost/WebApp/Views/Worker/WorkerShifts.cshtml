@@ -1,7 +1,10 @@
-﻿
+﻿@model WebApp.WorkerServiceReference.Shift[]
 @{
     ViewBag.Title = "WorkerShifts";
 }
 
 <h2>WorkerShifts</h2>
 
+<div id="workers">
+    @Html.Partial("_WorkerShiftsPartial", Model)
+</div>

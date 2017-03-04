@@ -1,0 +1,134 @@
+﻿@model WebApp.WorkerServiceReference.Shift[]
+
+<table class="table table-condensed" id="shiftTable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Объект</th>
+        <th>Список рабочих</th>
+        <th>Дата</th>
+        <th>
+            <button type="button" class="btn btn-info" id="addNewShiftBtn">Добавить</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Select((shift, index) => new {index, shift}))
+    {
+        <tr shiftid="@item.shift.ShiftId">
+            <td>@(item.index + 1)</td>
+            <td class="shift">@item.shift.Shift.Address</td>
+            <td class="workers">@string.Join(",  ", item.shift.Workers.Select(w => w.WorkerName))</td>
+            <td class="shiftDate">@item.shift.ShiftDate.ToShortDateString()</td>
+            <td>
+                <button type="button" class="btn btn-info editShift">Редактировать</button>
+                <button type="button" class="btn btn-danger deleteShift">Удалить</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot style="display: none">
+    <tr>
+        <td><input type="hidden" id="ShiftIdValue"/></td>
+        <td>
+            <div class="col-xs-12 left">
+                <input type="text" class="form-control" id="ShiftEdit" placeholder="Объект...">
+            </div>
+        </td>
+        <td>
+            <div class="col-xs-8 left">
+                <input type="text" class="form-control" id="WorkersEdit" placeholder="Список рабочих...">
+            </div>
+        </td>
+        <td>
+            <div class="col-xs-10 left">
+                <input type="text" class="form-control" id="shiftDateEdit" placeholder="Дата...">
+            </div>
+        </td>
+        <td>
+            <button type="button" class="btn btn-success" id="updateBtn">Сохранить</button>
+            <button type="button" class="btn btn-default" id="cancelUpdateBtn">Отменить</button>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+    $("#shiftTable tbody .deleteShift").click(function () {
+        var shiftId = $(this).closest('tr').attr("shiftid");
+        $.ajax({
+            type: "POST",
+            data: { 'shiftId': shiftId },
+            url: '@Url.Action("DeleteShift", "Worker")',
+            success: function (msg) {
+                //alert(msg);
+                shiftsRefrash();
+            }
+        });
+    });
+    $("#shiftTable tbody .editShift").click(function () {
+        //$("#shiftIdValue").val($(this).closest('tr').attr("shiftid"));
+        //$("#AddressEdit").val($(this).closest('tr').find(".address").text());
+        //$("#WorkerCountEdit").val($(this).closest('tr').find(".workerCount").text());
+        $("#shiftTable tfoot").show();
+    });
+    $("#addNewShiftBtn").click(function() {
+        $("#shiftTable tfoot").show();
+    });
+    $("#updateBtn").click(function () {
+        //var shift = {
+        //    Address: $("#AddressEdit").val(),
+        //    WorkerCount: $("#WorkerCountEdit").val()
+        //};
+        if ($("#shiftIdValue").val()) {
+            shift.ShiftId = $("#shiftIdValue").val();
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { 'shift': shift },
+            url: '@Url.Action("UpdateShift", "Worker")',
+            success: function (msg) {
+                if (msg.Status !== 'OK') {
+                    alert(msg.Message);
+                    return;
+                }
+                ClearShiftEdit();
+                $("#shiftTable tfoot").hide();
+                shiftsRefrash();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+
+
+    });
+    $("#cancelUpdateBtn").click(function () {
+        ClearShiftEdit();
+        $("#shiftTable tfoot").hide();
+    });
+    function ClearShiftEdit() {
+        //$("#shiftIdValue").val("");
+        //$("#AddressEdit").val("");
+        //$("#WorkerCountEdit").val("");
+    }
+
+    function shiftsRefrash() {
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("ShiftsPartial", "Worker")',
+            success: function (res) {
+                $("#shifts").html(res);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+
+    }
+</script>

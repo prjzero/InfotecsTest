@@ -15,24 +15,24 @@ namespace WebApp.WorkerServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Worker", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Shift", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
     [System.SerializableAttribute()]
-    public partial class Worker : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Shift : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CostField;
+        private System.DateTime ShiftDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SpecialtyField;
+        private System.Guid ShiftIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid WorkerIdField;
+        private WebApp.WorkerServiceReference.WorkerObject WorkerObjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string WorkerNameField;
+        private WebApp.WorkerServiceReference.Worker[] WorkersField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -45,53 +45,53 @@ namespace WebApp.WorkerServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Cost {
+        public System.DateTime ShiftDate {
             get {
-                return this.CostField;
+                return this.ShiftDateField;
             }
             set {
-                if ((this.CostField.Equals(value) != true)) {
-                    this.CostField = value;
-                    this.RaisePropertyChanged("Cost");
+                if ((this.ShiftDateField.Equals(value) != true)) {
+                    this.ShiftDateField = value;
+                    this.RaisePropertyChanged("ShiftDate");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Specialty {
+        public System.Guid ShiftId {
             get {
-                return this.SpecialtyField;
+                return this.ShiftIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.SpecialtyField, value) != true)) {
-                    this.SpecialtyField = value;
-                    this.RaisePropertyChanged("Specialty");
+                if ((this.ShiftIdField.Equals(value) != true)) {
+                    this.ShiftIdField = value;
+                    this.RaisePropertyChanged("ShiftId");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid WorkerId {
+        public WebApp.WorkerServiceReference.WorkerObject WorkerObject {
             get {
-                return this.WorkerIdField;
+                return this.WorkerObjectField;
             }
             set {
-                if ((this.WorkerIdField.Equals(value) != true)) {
-                    this.WorkerIdField = value;
-                    this.RaisePropertyChanged("WorkerId");
+                if ((object.ReferenceEquals(this.WorkerObjectField, value) != true)) {
+                    this.WorkerObjectField = value;
+                    this.RaisePropertyChanged("WorkerObject");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string WorkerName {
+        public WebApp.WorkerServiceReference.Worker[] Workers {
             get {
-                return this.WorkerNameField;
+                return this.WorkersField;
             }
             set {
-                if ((object.ReferenceEquals(this.WorkerNameField, value) != true)) {
-                    this.WorkerNameField = value;
-                    this.RaisePropertyChanged("WorkerName");
+                if ((object.ReferenceEquals(this.WorkersField, value) != true)) {
+                    this.WorkersField = value;
+                    this.RaisePropertyChanged("Workers");
                 }
             }
         }
@@ -183,9 +183,108 @@ namespace WebApp.WorkerServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Worker", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.SerializableAttribute()]
+    public partial class Worker : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CostField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SpecialtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid WorkerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WorkerNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Cost {
+            get {
+                return this.CostField;
+            }
+            set {
+                if ((this.CostField.Equals(value) != true)) {
+                    this.CostField = value;
+                    this.RaisePropertyChanged("Cost");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Specialty {
+            get {
+                return this.SpecialtyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SpecialtyField, value) != true)) {
+                    this.SpecialtyField = value;
+                    this.RaisePropertyChanged("Specialty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid WorkerId {
+            get {
+                return this.WorkerIdField;
+            }
+            set {
+                if ((this.WorkerIdField.Equals(value) != true)) {
+                    this.WorkerIdField = value;
+                    this.RaisePropertyChanged("WorkerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkerName {
+            get {
+                return this.WorkerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkerNameField, value) != true)) {
+                    this.WorkerNameField = value;
+                    this.RaisePropertyChanged("WorkerName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WorkerServiceReference.IWorkerWcfService")]
     public interface IWorkerWcfService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateShiftResponse")]
+        void CreateShift(WebApp.WorkerServiceReference.Shift shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateShiftResponse")]
+        System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.Shift shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateWorkerResponse")]
         void CreateWorker(WebApp.WorkerServiceReference.Worker worker);
@@ -199,6 +298,12 @@ namespace WebApp.WorkerServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateWorkerObjectResponse")]
         System.Threading.Tasks.Task CreateWorkerObjectAsync(WebApp.WorkerServiceReference.WorkerObject workerObject);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/DeleteShift", ReplyAction="http://tempuri.org/IWorkerWcfService/DeleteShiftResponse")]
+        void DeleteShift(System.Guid shiftId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/DeleteShift", ReplyAction="http://tempuri.org/IWorkerWcfService/DeleteShiftResponse")]
+        System.Threading.Tasks.Task DeleteShiftAsync(System.Guid shiftId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/DeleteWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/DeleteWorkerResponse")]
         void DeleteWorker(System.Guid workerId);
         
@@ -211,6 +316,12 @@ namespace WebApp.WorkerServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/DeleteWorkerObjectResponse")]
         System.Threading.Tasks.Task DeleteWorkerObjectAsync(System.Guid workerObjectId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShifts", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftsResponse")]
+        WebApp.WorkerServiceReference.Shift[] GetShifts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShifts", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftsResponse")]
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift[]> GetShiftsAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjects", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectsResponse")]
         WebApp.WorkerServiceReference.WorkerObject[] GetWorkerObjects();
         
@@ -222,6 +333,12 @@ namespace WebApp.WorkerServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkers", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkersResponse")]
         System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse")]
+        void UpdateShift(WebApp.WorkerServiceReference.Shift shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse")]
+        System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.Shift shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateWorkerResponse")]
         void UpdateWorker(WebApp.WorkerServiceReference.Worker worker);
@@ -263,6 +380,14 @@ namespace WebApp.WorkerServiceReference {
                 base(binding, remoteAddress) {
         }
         
+        public void CreateShift(WebApp.WorkerServiceReference.Shift shift) {
+            base.Channel.CreateShift(shift);
+        }
+        
+        public System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.Shift shift) {
+            return base.Channel.CreateShiftAsync(shift);
+        }
+        
         public void CreateWorker(WebApp.WorkerServiceReference.Worker worker) {
             base.Channel.CreateWorker(worker);
         }
@@ -277,6 +402,14 @@ namespace WebApp.WorkerServiceReference {
         
         public System.Threading.Tasks.Task CreateWorkerObjectAsync(WebApp.WorkerServiceReference.WorkerObject workerObject) {
             return base.Channel.CreateWorkerObjectAsync(workerObject);
+        }
+        
+        public void DeleteShift(System.Guid shiftId) {
+            base.Channel.DeleteShift(shiftId);
+        }
+        
+        public System.Threading.Tasks.Task DeleteShiftAsync(System.Guid shiftId) {
+            return base.Channel.DeleteShiftAsync(shiftId);
         }
         
         public void DeleteWorker(System.Guid workerId) {
@@ -295,6 +428,14 @@ namespace WebApp.WorkerServiceReference {
             return base.Channel.DeleteWorkerObjectAsync(workerObjectId);
         }
         
+        public WebApp.WorkerServiceReference.Shift[] GetShifts() {
+            return base.Channel.GetShifts();
+        }
+        
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift[]> GetShiftsAsync() {
+            return base.Channel.GetShiftsAsync();
+        }
+        
         public WebApp.WorkerServiceReference.WorkerObject[] GetWorkerObjects() {
             return base.Channel.GetWorkerObjects();
         }
@@ -309,6 +450,14 @@ namespace WebApp.WorkerServiceReference {
         
         public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync() {
             return base.Channel.GetWorkersAsync();
+        }
+        
+        public void UpdateShift(WebApp.WorkerServiceReference.Shift shift) {
+            base.Channel.UpdateShift(shift);
+        }
+        
+        public System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.Shift shift) {
+            return base.Channel.UpdateShiftAsync(shift);
         }
         
         public void UpdateWorker(WebApp.WorkerServiceReference.Worker worker) {

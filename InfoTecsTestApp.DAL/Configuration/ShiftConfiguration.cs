@@ -8,7 +8,7 @@ namespace InfoTecsTestApp.DAL.Configuration
         public ShiftConfiguration()
         {
             Property(c => c.ShiftId).IsRequired();
-            Property(c => c.Date).IsRequired();
+            Property(c => c.ShiftDate).IsRequired();
         }
     }
 }

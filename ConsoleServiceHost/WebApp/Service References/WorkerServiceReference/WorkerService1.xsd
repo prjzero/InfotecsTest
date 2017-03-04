@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8080/WorkerService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Shift">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ShiftDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ShiftId" type="ser:guid" />
+      <xs:element minOccurs="0" name="WorkerObject" nillable="true" type="tns:WorkerObject" />
+      <xs:element minOccurs="0" name="Workers" nillable="true" type="tns:ArrayOfWorker" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Shift" nillable="true" type="tns:Shift" />
+  <xs:complexType name="WorkerObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkerCount" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkerObjectId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkerObject" nillable="true" type="tns:WorkerObject" />
+  <xs:complexType name="ArrayOfWorker">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Worker" nillable="true" type="tns:Worker" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorker" nillable="true" type="tns:ArrayOfWorker" />
   <xs:complexType name="Worker">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cost" type="xs:int" />
@@ -10,24 +33,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Worker" nillable="true" type="tns:Worker" />
-  <xs:complexType name="WorkerObject">
+  <xs:complexType name="ArrayOfShift">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="WorkerCount" type="xs:int" />
-      <xs:element minOccurs="0" name="WorkerObjectId" type="ser:guid" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Shift" nillable="true" type="tns:Shift" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="WorkerObject" nillable="true" type="tns:WorkerObject" />
+  <xs:element name="ArrayOfShift" nillable="true" type="tns:ArrayOfShift" />
   <xs:complexType name="ArrayOfWorkerObject">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkerObject" nillable="true" type="tns:WorkerObject" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfWorkerObject" nillable="true" type="tns:ArrayOfWorkerObject" />
-  <xs:complexType name="ArrayOfWorker">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Worker" nillable="true" type="tns:Worker" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfWorker" nillable="true" type="tns:ArrayOfWorker" />
 </xs:schema>

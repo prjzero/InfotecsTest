@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEntityService.cs" />
+    <Compile Include="IShiftService.cs" />
     <Compile Include="IWorkerObjectService.cs" />
+    <Compile Include="ShiftService.cs" />
     <Compile Include="WorkerObjectService.cs" />
     <Compile Include="WorkerService.cs" />
     <Compile Include="IWorkerService.cs" />

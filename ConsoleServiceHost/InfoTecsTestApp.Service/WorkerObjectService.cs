@@ -11,46 +11,55 @@ namespace InfoTecsTestApp.Service
 {
     public class WorkerObjectService : IWorkerObjectService
     {
-        private readonly IWorkerObjectRepository workerObjectRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkerObjectRepository _workerObjectRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public WorkerObjectService(IWorkerObjectRepository workerObjectRepository, IUnitOfWork unitOfWork)
         {
-            this.workerObjectRepository = workerObjectRepository;
-            this.unitOfWork = unitOfWork;
+            this._workerObjectRepository = workerObjectRepository;
+            this._unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<WorkerObject> GetWorkerObjects()
+        public IEnumerable<WorkerObject> GetAll()
         {
-            return workerObjectRepository.GetAll();
+            return _workerObjectRepository.GetAll();
         }
 
-        public WorkerObject GetWorkerObject(Guid workerObjectId)
+        public WorkerObject Get(Guid workerObjectId)
         {
-            return workerObjectRepository.GetById(workerObjectId);
+            return _workerObjectRepository.GetById(workerObjectId);
         }
 
-        public void DeleteWorkerObject(Guid workerObjectId)
+        public void Delete(Guid workerObjectId)
         {
-            workerObjectRepository.Delete(worker => worker.WorkerObjectId == workerObjectId);
-            SaveWorkerObject();
+            _workerObjectRepository.Delete(worker => worker.WorkerObjectId == workerObjectId);
+            Save();
         }
 
-        public void CreateWorkerObject(WorkerObject workerObject)
+        public void Create(WorkerObject workerObject)
         {
-            workerObjectRepository.Add(workerObject);
-            SaveWorkerObject();
+            ValidateWorkerObject(workerObject);
+            _workerObjectRepository.Add(workerObject);
+            Save();
         }
 
-        public void UpdateWorkerObject(WorkerObject workerObject)
+        public void Update(WorkerObject workerObject)
         {
-            workerObjectRepository.Update(workerObject);
-            SaveWorkerObject();
+            ValidateWorkerObject(workerObject);
+            _workerObjectRepository.Update(workerObject);
+            Save();
         }
 
-        public void SaveWorkerObject()
+        public void Save()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
+        }
+        private void ValidateWorkerObject(WorkerObject workerObject)
+        {
+            if (workerObject.WorkerCount <= 0)
+                throw new Exception("Количество рабочих должно быть больше 0");
+            if (_workerObjectRepository.GetAll(true).Any(w => w.Address == workerObject.Address && w.WorkerObjectId != workerObject.WorkerObjectId))
+                throw new Exception("Адрес должег быть уникальным");
         }
     }
 }

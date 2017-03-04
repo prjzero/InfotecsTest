@@ -7,6 +7,12 @@
       <xsd:import schemaLocation="http://localhost:8080/WorkerService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IWorkerWcfService_CreateShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateShift" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_CreateShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateShiftResponse" />
+  </wsdl:message>
   <wsdl:message name="IWorkerWcfService_CreateWorker_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateWorker" />
   </wsdl:message>
@@ -18,6 +24,12 @@
   </wsdl:message>
   <wsdl:message name="IWorkerWcfService_CreateWorkerObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateWorkerObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteShift" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteShiftResponse" />
   </wsdl:message>
   <wsdl:message name="IWorkerWcfService_DeleteWorker_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteWorker" />
@@ -31,6 +43,12 @@
   <wsdl:message name="IWorkerWcfService_DeleteWorkerObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteWorkerObjectResponse" />
   </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetShifts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShifts" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetShifts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShiftsResponse" />
+  </wsdl:message>
   <wsdl:message name="IWorkerWcfService_GetWorkerObjects_InputMessage">
     <wsdl:part name="parameters" element="tns:GetWorkerObjects" />
   </wsdl:message>
@@ -42,6 +60,12 @@
   </wsdl:message>
   <wsdl:message name="IWorkerWcfService_GetWorkers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWorkersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateShift" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateShiftResponse" />
   </wsdl:message>
   <wsdl:message name="IWorkerWcfService_UpdateWorker_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateWorker" />
@@ -56,6 +80,10 @@
     <wsdl:part name="parameters" element="tns:UpdateWorkerObjectResponse" />
   </wsdl:message>
   <wsdl:portType name="IWorkerWcfService">
+    <wsdl:operation name="CreateShift">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/CreateShift" message="tns:IWorkerWcfService_CreateShift_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/CreateShiftResponse" message="tns:IWorkerWcfService_CreateShift_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateWorker">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorker" message="tns:IWorkerWcfService_CreateWorker_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerResponse" message="tns:IWorkerWcfService_CreateWorker_OutputMessage" />
@@ -63,6 +91,10 @@
     <wsdl:operation name="CreateWorkerObject">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerObject" message="tns:IWorkerWcfService_CreateWorkerObject_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerObjectResponse" message="tns:IWorkerWcfService_CreateWorkerObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteShift">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteShift" message="tns:IWorkerWcfService_DeleteShift_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteShiftResponse" message="tns:IWorkerWcfService_DeleteShift_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteWorker">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorker" message="tns:IWorkerWcfService_DeleteWorker_InputMessage" />
@@ -72,6 +104,10 @@
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerObject" message="tns:IWorkerWcfService_DeleteWorkerObject_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerObjectResponse" message="tns:IWorkerWcfService_DeleteWorkerObject_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetShifts">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/GetShifts" message="tns:IWorkerWcfService_GetShifts_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/GetShiftsResponse" message="tns:IWorkerWcfService_GetShifts_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetWorkerObjects">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjects" message="tns:IWorkerWcfService_GetWorkerObjects_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjectsResponse" message="tns:IWorkerWcfService_GetWorkerObjects_OutputMessage" />
@@ -79,6 +115,10 @@
     <wsdl:operation name="GetWorkers">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkers" message="tns:IWorkerWcfService_GetWorkers_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkersResponse" message="tns:IWorkerWcfService_GetWorkers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateShift">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateShift" message="tns:IWorkerWcfService_UpdateShift_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse" message="tns:IWorkerWcfService_UpdateShift_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateWorker">
       <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateWorker" message="tns:IWorkerWcfService_UpdateWorker_InputMessage" />
@@ -91,6 +131,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWorkerWcfService" type="tns:IWorkerWcfService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateShift">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/CreateShift" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateWorker">
       <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/CreateWorker" style="document" />
       <wsdl:input>
@@ -102,6 +151,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateWorkerObject">
       <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/CreateWorkerObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteShift">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/DeleteShift" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -127,6 +185,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetShifts">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/GetShifts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetWorkerObjects">
       <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjects" style="document" />
       <wsdl:input>
@@ -138,6 +205,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetWorkers">
       <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/GetWorkers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateShift">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/UpdateShift" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
