@@ -1,0 +1,11 @@
+﻿@model WebApp.WorkerServiceReference.WorkerObject[]
+@{
+    ViewBag.Title = "WorkerObjects";
+}
+
+<h2>WorkerObjects</h2>
+
+
+<div id="workers">
+    @Html.Partial("_WorkersObjectsPartial", Model)
+</div>

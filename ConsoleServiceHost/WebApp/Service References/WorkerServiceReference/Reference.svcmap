@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ccbf647c-c99c-4184-baec-976286b56b31" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/WorkerService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WorkerService2.xsd" MetadataType="Schema" ID="9f8211ac-1b41-44dd-acd2-8851bc91f4a9" SourceId="1" SourceUrl="http://localhost:8080/WorkerService?xsd=xsd1" />
+    <MetadataFile FileName="WorkerService.wsdl" MetadataType="Wsdl" ID="6a5fbc66-9bde-4492-8409-ad952e761374" SourceId="1" SourceUrl="http://localhost:8080/WorkerService?wsdl" />
+    <MetadataFile FileName="WorkerService1.xsd" MetadataType="Schema" ID="fe397506-c231-46b4-baa2-46cd88d68b09" SourceId="1" SourceUrl="http://localhost:8080/WorkerService?xsd=xsd2" />
+    <MetadataFile FileName="WorkerService.disco" MetadataType="Disco" ID="41e0ab14-3213-4444-9a88-7a65b302389b" SourceId="1" SourceUrl="http://localhost:8080/WorkerService?disco" />
+    <MetadataFile FileName="WorkerService.xsd" MetadataType="Schema" ID="62880f9e-cbbc-403f-a306-c793cc14e330" SourceId="1" SourceUrl="http://localhost:8080/WorkerService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

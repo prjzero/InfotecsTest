@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WorkerWcfService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/WorkerService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/WorkerService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/WorkerService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWorkerWcfService_CreateWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorker" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_CreateWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_CreateWorkerObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorkerObject" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_CreateWorkerObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateWorkerObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorker" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteWorkerObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkerObject" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_DeleteWorkerObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkerObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetWorkerObjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkerObjects" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetWorkerObjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkerObjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetWorkers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkers" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_GetWorkers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWorker" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateWorkerObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWorkerObject" />
+  </wsdl:message>
+  <wsdl:message name="IWorkerWcfService_UpdateWorkerObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWorkerObjectResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWorkerWcfService">
+    <wsdl:operation name="CreateWorker">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorker" message="tns:IWorkerWcfService_CreateWorker_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerResponse" message="tns:IWorkerWcfService_CreateWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWorkerObject">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerObject" message="tns:IWorkerWcfService_CreateWorkerObject_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/CreateWorkerObjectResponse" message="tns:IWorkerWcfService_CreateWorkerObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorker">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorker" message="tns:IWorkerWcfService_DeleteWorker_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerResponse" message="tns:IWorkerWcfService_DeleteWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorkerObject">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerObject" message="tns:IWorkerWcfService_DeleteWorkerObject_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/DeleteWorkerObjectResponse" message="tns:IWorkerWcfService_DeleteWorkerObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkerObjects">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjects" message="tns:IWorkerWcfService_GetWorkerObjects_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjectsResponse" message="tns:IWorkerWcfService_GetWorkerObjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkers" message="tns:IWorkerWcfService_GetWorkers_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/GetWorkersResponse" message="tns:IWorkerWcfService_GetWorkers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorker">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateWorker" message="tns:IWorkerWcfService_UpdateWorker_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateWorkerResponse" message="tns:IWorkerWcfService_UpdateWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorkerObject">
+      <wsdl:input wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateWorkerObject" message="tns:IWorkerWcfService_UpdateWorkerObject_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWorkerWcfService/UpdateWorkerObjectResponse" message="tns:IWorkerWcfService_UpdateWorkerObject_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWorkerWcfService" type="tns:IWorkerWcfService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateWorker">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/CreateWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWorkerObject">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/CreateWorkerObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorker">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/DeleteWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorkerObject">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/DeleteWorkerObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkerObjects">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/GetWorkers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorker">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/UpdateWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorkerObject">
+      <soap:operation soapAction="http://tempuri.org/IWorkerWcfService/UpdateWorkerObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WorkerWcfService">
+    <wsdl:port name="BasicHttpBinding_IWorkerWcfService" binding="tns:BasicHttpBinding_IWorkerWcfService">
+      <soap:address location="http://localhost:8080/WorkerService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

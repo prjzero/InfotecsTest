@@ -1,0 +1,135 @@
+﻿@model WebApp.WorkerServiceReference.Worker[]
+
+<table class="table table-condensed" id="workerTable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Имя</th>
+        <th>Зарплата</th>
+        <th>Специальность</th>
+        <th>
+            <button type="button" class="btn btn-info" id="addNewWorkerBtn">Добавить</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Select((worker, index) => new { index, worker}))
+    {
+        <tr workerid="@item.worker.WorkerId">
+            <td>@(item.index+1)</td>
+            <td class="workerName">@item.worker.WorkerName</td>
+            <td class="cost">@item.worker.Cost</td>
+            <td class="specialty">@item.worker.Specialty</td>
+            <td>
+                <button type="button" class="btn btn-info editWorker">Редактировать</button>
+                <button type="button" class="btn btn-danger deleteWorker">Удалить</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot style="display: none">
+    <tr>
+        <td><input type="hidden" id="workerIdValue"/></td>
+        <td>
+            <div class="col-xs-12 left">
+                <input type="text" class="form-control" id="WorkerNameEdit" placeholder="Имя...">
+            </div>
+        </td>
+        <td>
+            <div class="col-xs-8 left">
+                <input type="text" class="form-control" id="CostEdit" placeholder="Зарплата...">
+            </div>
+        </td>
+        <td>
+            <div class="col-xs-10 left">
+                <input type="text" class="form-control" id="SpecialtyEdit" placeholder="Специальность...">
+            </div>
+        </td>
+        <td>
+            <button type="button" class="btn btn-success" id="updateBtn">Сохранить</button>
+            <button type="button" class="btn btn-default" id="cancelUpdateBtn">Отменить</button>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+
+    $("#workerTable tbody .deleteWorker").click(function () {
+        var workerId = $(this).closest('tr').attr("workerid");
+        $.ajax({
+            type: "POST",
+            data: { 'workerId': workerId },
+            url: '@Url.Action("DeleteWorker", "Worker")',
+            success: function (msg) {
+                //alert(msg);
+                workersRefrash();
+            }
+        });
+    });
+    $("#workerTable tbody .editWorker").click(function () {
+        $("#workerIdValue").val($(this).closest('tr').attr("workerid"));
+        $("#WorkerNameEdit").val($(this).closest('tr').find(".workerName").text());
+        $("#CostEdit").val($(this).closest('tr').find(".cost").text());
+        $("#SpecialtyEdit").val($(this).closest('tr').find(".specialty").text());
+        $("#workerTable tfoot").show();
+    });
+    $("#addNewWorkerBtn").click(function() {
+        $("#workerTable tfoot").show();
+    });
+    $("#updateBtn").click(function () {
+        var worker = {
+            WorkerName: $("#WorkerNameEdit").val(),
+            Cost: $("#CostEdit").val(),
+            Specialty: $("#SpecialtyEdit").val()
+        };
+        if ($("#workerIdValue").val()) {
+            worker.WorkerId = $("#workerIdValue").val();
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { 'worker': worker },
+            url: '@Url.Action("UpdateWorker", "Worker")',
+            success: function (msg) {
+                if (msg.Status !== 'OK') {
+                    alert(msg.Message);
+                    return;
+                }
+                ClearWorkerEdit();
+                $("#workerTable tfoot").hide();
+                workersRefrash();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+    });
+    $("#cancelUpdateBtn").click(function () {
+        ClearWorkerEdit();
+        $("#workerTable tfoot").hide();
+    });
+    function ClearWorkerEdit() {
+        $("#workerIdValue").val("");
+        $("#WorkerNameEdit").val("");
+        $("#CostEdit").val("");
+        $("#SpecialtyEdit").val("");
+    }
+
+    function workersRefrash() {
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("WorkersPartial", "Worker")',
+            success: function (res) {
+                $("#workers").html(res);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+        
+    }
+</script>

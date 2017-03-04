@@ -1,0 +1,127 @@
+﻿@model WebApp.WorkerServiceReference.WorkerObject[]
+
+<table class="table table-condensed" id="workerObjectTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Адрес</th>
+            <th>Количество требуемых рабочих</th>
+            <th>
+                <button type="button" class="btn btn-info" id="addNewWorkerObjectBtn">Добавить</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Select((workerObject, index) => new { index, workerObject }))
+        {
+            <tr workerobjectid="@item.workerObject.WorkerObjectId">
+                <td>@(item.index+1)</td>
+                <td class="address">@item.workerObject.Address</td>
+                <td class="workerCount">@item.workerObject.WorkerCount</td>
+                <td>
+                    <button type="button" class="btn btn-info editWorkerObject">Редактировать</button>
+                    <button type="button" class="btn btn-danger deleteWorkerObject">Удалить</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot style="display: none">
+        <tr>
+            <td><input type="hidden" id="workerObjectIdValue" /></td>
+            <td>
+                <div class="col-xs-12 left">
+                    <input type="text" class="form-control" id="AddressEdit" placeholder="Адрес...">
+                </div>
+            </td>
+            <td>
+                <div class="col-xs-8 left">
+                    <input type="text" class="form-control" id="WorkerCountEdit" placeholder="Кол-во рабочих...">
+                </div>
+            </td>
+            <td>
+                <button type="button" class="btn btn-success" id="updateBtn">Сохранить</button>
+                <button type="button" class="btn btn-default" id="cancelUpdateBtn">Отменить</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+
+    $("#workerObjectTable tbody .deleteWorkerObject").click(function () {
+        var workerObjectId = $(this).closest('tr').attr("workerobjectid");
+        $.ajax({
+            type: "POST",
+            data: { 'workerObjectId': workerObjectId },
+            url: '@Url.Action("DeleteWorkerObject", "Worker")',
+            success: function (msg) {
+                //alert(msg);
+                workersRefrash();
+            }
+        });
+    });
+    $("#workerObjectTable tbody .editWorkerObject").click(function () {
+        $("#workerObjectIdValue").val($(this).closest('tr').attr("workerobjectid"));
+        $("#AddressEdit").val($(this).closest('tr').find(".address").text());
+        $("#WorkerCountEdit").val($(this).closest('tr').find(".workerCount").text());
+        $("#workerObjectTable tfoot").show();
+    });
+    $("#addNewWorkerObjectBtn").click(function() {
+        $("#workerObjectTable tfoot").show();
+    });
+    $("#updateBtn").click(function () {
+        var workerObject = {
+            Address: $("#AddressEdit").val(),
+            WorkerCount: $("#WorkerCountEdit").val()
+        };
+        if ($("#workerObjectIdValue").val()) {
+            workerObject.WorkerObjectId = $("#workerObjectIdValue").val();
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { 'workerObject': workerObject },
+            url: '@Url.Action("UpdateWorkerObject", "Worker")',
+            success: function (msg) {
+                if (msg.Status !== 'OK') {
+                    alert(msg.Message);
+                    return;
+                }
+                ClearWorkerObjectEdit();
+                $("#workerObjectTable tfoot").hide();
+                workersRefrash();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+
+        
+    });
+    $("#cancelUpdateBtn").click(function () {
+        ClearWorkerObjectEdit();
+        $("#workerObjectTable tfoot").hide();
+    });
+    function ClearWorkerObjectEdit() {
+        $("#workerObjectIdValue").val("");
+        $("#AddressEdit").val("");
+        $("#WorkerCountEdit").val("");
+    }
+
+    function workersRefrash() {
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("WorkerObjectsPartial", "Worker")',
+            success: function (res) {
+                $("#workers").html(res);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error during process: \n' + xhr.responseText);
+            }
+        });
+
+    }
+</script>
