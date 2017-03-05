@@ -1,4 +1,4 @@
-﻿@model WebApp.WorkerServiceReference.Shift[]
+﻿@model WebApp.ViewModel.WorkerShiftsViewModel
 
 <table class="table table-condensed" id="shiftTable">
     <thead>
@@ -13,11 +13,11 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Select((shift, index) => new {index, shift}))
+    @foreach (var item in Model.Shifts.Select((shift, index) => new {index, shift}))
     {
         <tr shiftid="@item.shift.ShiftId">
             <td>@(item.index + 1)</td>
-            <td class="shift">@item.shift.Shift.Address</td>
+            <td class="workerObject">@item.shift.WorkerObject.Address</td>
             <td class="workers">@string.Join(",  ", item.shift.Workers.Select(w => w.WorkerName))</td>
             <td class="shiftDate">@item.shift.ShiftDate.ToShortDateString()</td>
             <td>
@@ -31,18 +31,31 @@
     <tr>
         <td><input type="hidden" id="ShiftIdValue"/></td>
         <td>
-            <div class="col-xs-12 left">
-                <input type="text" class="form-control" id="ShiftEdit" placeholder="Объект...">
-            </div>
+            <select class="selectpicker" id="workerObjectSelect">
+                @foreach (var item in Model.WorkerObjects.Select(wo => new { Id = wo.WorkerObjectId, Addess = wo.Address }))
+                {
+                    <option value="@item.Id">@item.Addess</option>
+                }
+            </select>
+
         </td>
         <td>
-            <div class="col-xs-8 left">
-                <input type="text" class="form-control" id="WorkersEdit" placeholder="Список рабочих...">
-            </div>
+            <select class="selectpicker" id="workersSelect" multiple>
+                @foreach (var item in Model.Workers.Select(w => new { Id = w.WorkerId, WorkerName = w.WorkerName }))
+                {
+                    <option value="@item.Id">@item.WorkerName</option>
+                }
+            </select>
+
         </td>
         <td>
             <div class="col-xs-10 left">
-                <input type="text" class="form-control" id="shiftDateEdit" placeholder="Дата...">
+                <div class='input-group date' id='shiftDateEdit'>
+                    <input type='text' class="form-control" placeholder="Дата..."/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
         </td>
         <td>
@@ -55,7 +68,17 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $(function () {
+            $('#shiftDateEdit').datetimepicker({
+                locale: 'ru',
+                format: 'DD.MM.YYYY'
+            });
+        });
+    });
 
+    $(".dropdown-menu li a").click(function () {
+        var selText = this.text;
+        $(this).parents('.dropdown').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
     });
 
     $("#shiftTable tbody .deleteShift").click(function () {
@@ -79,18 +102,30 @@
     $("#addNewShiftBtn").click(function() {
         $("#shiftTable tfoot").show();
     });
+    var selectedWorkerObject = $.map($(this).find("option:selected"), function (o) { return $(o).val(); });
+    $('#workerObjectSelect').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+        selectedWorkerObject = $.map($(this).find("option:selected"), function (o) { return $(o).val(); });
+    });
+    var selectedWorkers = [];
+    $('#workersSelect').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+        selectedWorkers = $.map($(this).find("option:selected"), function (o) { return $(o).val();});
+    });
+
     $("#updateBtn").click(function () {
-        //var shift = {
-        //    Address: $("#AddressEdit").val(),
-        //    WorkerCount: $("#WorkerCountEdit").val()
-        //};
+        $('#workerObjectSelect').trigger('changed.bs.select');
+        $('#workersSelect').trigger('changed.bs.select');
+        var shift = {
+            WorkerObjectId: selectedWorkerObject[0],
+            Workers:  selectedWorkers,
+            ShiftDate: $("#shiftDateEdit input").val()
+        };
         if ($("#shiftIdValue").val()) {
             shift.ShiftId = $("#shiftIdValue").val();
         }
 
         $.ajax({
             type: "POST",
-            data: { 'shift': shift },
+            data: { 'shiftId': shift.ShiftId, 'workerObjectId': shift.WorkerObjectId, 'workers': shift.Workers, 'shiftDate': shift.ShiftDate },
             url: '@Url.Action("UpdateShift", "Worker")',
             success: function (msg) {
                 if (msg.Status !== 'OK') {

@@ -334,6 +334,24 @@ namespace WebApp.WorkerServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkers", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkersResponse")]
         System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShift", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftResponse")]
+        WebApp.WorkerServiceReference.Shift GetShift(System.Guid shiftId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShift", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftResponse")]
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift> GetShiftAsync(System.Guid shiftId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectResponse")]
+        WebApp.WorkerServiceReference.WorkerObject GetWorkerObject(System.Guid workerObjectId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectResponse")]
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject> GetWorkerObjectAsync(System.Guid workerObjectId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerResponse")]
+        WebApp.WorkerServiceReference.Worker GetWorker(System.Guid workerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerResponse")]
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker> GetWorkerAsync(System.Guid workerId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse")]
         void UpdateShift(WebApp.WorkerServiceReference.Shift shift);
         
@@ -450,6 +468,30 @@ namespace WebApp.WorkerServiceReference {
         
         public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync() {
             return base.Channel.GetWorkersAsync();
+        }
+        
+        public WebApp.WorkerServiceReference.Shift GetShift(System.Guid shiftId) {
+            return base.Channel.GetShift(shiftId);
+        }
+        
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift> GetShiftAsync(System.Guid shiftId) {
+            return base.Channel.GetShiftAsync(shiftId);
+        }
+        
+        public WebApp.WorkerServiceReference.WorkerObject GetWorkerObject(System.Guid workerObjectId) {
+            return base.Channel.GetWorkerObject(workerObjectId);
+        }
+        
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject> GetWorkerObjectAsync(System.Guid workerObjectId) {
+            return base.Channel.GetWorkerObjectAsync(workerObjectId);
+        }
+        
+        public WebApp.WorkerServiceReference.Worker GetWorker(System.Guid workerId) {
+            return base.Channel.GetWorker(workerId);
+        }
+        
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker> GetWorkerAsync(System.Guid workerId) {
+            return base.Channel.GetWorkerAsync(workerId);
         }
         
         public void UpdateShift(WebApp.WorkerServiceReference.Shift shift) {

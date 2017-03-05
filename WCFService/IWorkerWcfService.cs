@@ -27,6 +27,13 @@ namespace WCFService
         [OperationContract]
         IEnumerable<Worker> GetWorkers();
         [OperationContract]
+        Shift GetShift(Guid shiftId);
+        [OperationContract]
+        WorkerObject GetWorkerObject(Guid workerObjectId);
+
+        [OperationContract]
+        Worker GetWorker(Guid workerId);
+        [OperationContract]
         void UpdateShift(Shift shift);
         [OperationContract]
         void UpdateWorker(Worker worker);

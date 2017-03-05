@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.ViewModel;
 using WebApp.WorkerServiceReference;
 
 namespace WebApp.Controllers
@@ -93,8 +94,41 @@ namespace WebApp.Controllers
 
         public ActionResult WorkerShifts()
         {
-            var result = _workerService.GetShifts();
-            return View(result);
+            var shifts = _workerService.GetShifts();
+            var workers = _workerService.GetWorkers();
+            var workerObjects = _workerService.GetWorkerObjects();
+            var workerShiftsViewModel = new WorkerShiftsViewModel()
+            {
+                Shifts = shifts,
+                Workers = workers,
+                WorkerObjects = workerObjects
+            };
+            return View(workerShiftsViewModel);
+        }
+
+        public ActionResult UpdateShift(string shiftId, string workerObjectId, Guid[] workers, string shiftDate)
+        {
+            return GetStatusResult(() =>
+            {
+                DateTime shiftDateTime;
+                DateTime.TryParse(shiftDate, out shiftDateTime);
+                Guid workerObjectGuid;
+                Guid.TryParse(workerObjectId, out workerObjectGuid);
+                var requestWorkerObject = _workerService.GetWorkerObject(workerObjectGuid);
+                if (workers == null)
+                    workers = new Guid[] {};
+                var requestWorkers = _workerService.GetWorkers().Where(w => workers.Contains(w.WorkerId)).ToArray();
+
+                Guid shiftIdGuid;
+                Guid.TryParse(shiftId, out shiftIdGuid);
+
+                var shift = new Shift() { ShiftDate = shiftDateTime, Workers = requestWorkers, WorkerObject = requestWorkerObject, ShiftId = shiftIdGuid };
+                if (shiftIdGuid.Equals(Guid.Empty))
+                    _workerService.CreateShift(shift);
+                else
+                    _workerService.UpdateShift(shift);
+            });
+            
         }
 
         private ActionResult GetStatusResult(Action process)
@@ -111,5 +145,6 @@ namespace WebApp.Controllers
             return Json(new { Status = "OK" });
         }
 
+        
     }
 }

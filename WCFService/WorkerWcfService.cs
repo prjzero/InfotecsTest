@@ -29,6 +29,21 @@ namespace WCFService
             return _workerService.GetAll();
         }
 
+        public Shift GetShift(Guid shiftId)
+        {
+            return _shiftService.Get(shiftId);
+        }
+
+        public WorkerObject GetWorkerObject(Guid workerObjectId)
+        {
+            return _workerObjectService.Get(workerObjectId);
+        }
+
+        public Worker GetWorker(Guid workerId)
+        {
+            return _workerService.Get(workerId);
+        }
+
         public void CreateWorker(Worker worker)
         {
             _workerService.Create(worker);
