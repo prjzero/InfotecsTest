@@ -9,7 +9,7 @@ namespace WCFService
     public interface IWorkerWcfService
     {
         [OperationContract]
-        void CreateShift(Shift shift);
+        void CreateShift(ShiftDto shift);
         [OperationContract]
         void CreateWorker(Worker worker);
         [OperationContract]
@@ -21,20 +21,19 @@ namespace WCFService
         [OperationContract]
         void DeleteWorkerObject(Guid workerObjectId);
         [OperationContract]
-        IEnumerable<Shift> GetShifts();
+        IEnumerable<ShiftDto> GetShifts();
         [OperationContract]
-        IEnumerable<WorkerObject> GetWorkerObjects();
+        IEnumerable<WorkerObjectDto> GetWorkerObjects();
         [OperationContract]
-        IEnumerable<Worker> GetWorkers();
+        IEnumerable<WorkerDto> GetWorkers();
         [OperationContract]
-        Shift GetShift(Guid shiftId);
+        ShiftDto GetShift(Guid shiftId);
         [OperationContract]
-        WorkerObject GetWorkerObject(Guid workerObjectId);
-
+        WorkerObjectDto GetWorkerObject(Guid workerObjectId);
         [OperationContract]
-        Worker GetWorker(Guid workerId);
+        WorkerDto GetWorker(Guid workerId);
         [OperationContract]
-        void UpdateShift(Shift shift);
+        void UpdateShift(ShiftDto shift);
         [OperationContract]
         void UpdateWorker(Worker worker);
         [OperationContract]

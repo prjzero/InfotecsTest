@@ -15,9 +15,9 @@ namespace WebApp.WorkerServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Shift", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ShiftDto", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
     [System.SerializableAttribute()]
-    public partial class Shift : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ShiftDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -29,10 +29,10 @@ namespace WebApp.WorkerServiceReference {
         private System.Guid ShiftIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebApp.WorkerServiceReference.WorkerObject WorkerObjectField;
+        private System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto> ShiftWorkersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebApp.WorkerServiceReference.Worker[] WorkersField;
+        private WebApp.WorkerServiceReference.WorkerObjectDto WorkerObjectField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -71,7 +71,20 @@ namespace WebApp.WorkerServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebApp.WorkerServiceReference.WorkerObject WorkerObject {
+        public System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto> ShiftWorkers {
+            get {
+                return this.ShiftWorkersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ShiftWorkersField, value) != true)) {
+                    this.ShiftWorkersField = value;
+                    this.RaisePropertyChanged("ShiftWorkers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApp.WorkerServiceReference.WorkerObjectDto WorkerObject {
             get {
                 return this.WorkerObjectField;
             }
@@ -79,19 +92,6 @@ namespace WebApp.WorkerServiceReference {
                 if ((object.ReferenceEquals(this.WorkerObjectField, value) != true)) {
                     this.WorkerObjectField = value;
                     this.RaisePropertyChanged("WorkerObject");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebApp.WorkerServiceReference.Worker[] Workers {
-            get {
-                return this.WorkersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.WorkersField, value) != true)) {
-                    this.WorkersField = value;
-                    this.RaisePropertyChanged("Workers");
                 }
             }
         }
@@ -108,9 +108,9 @@ namespace WebApp.WorkerServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkerObject", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkerObjectDto", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
     [System.SerializableAttribute()]
-    public partial class WorkerObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class WorkerObjectDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -169,6 +169,99 @@ namespace WebApp.WorkerServiceReference {
                 if ((this.WorkerObjectIdField.Equals(value) != true)) {
                     this.WorkerObjectIdField = value;
                     this.RaisePropertyChanged("WorkerObjectId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkerDto", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.SerializableAttribute()]
+    public partial class WorkerDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CostField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SpecialtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid WorkerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WorkerNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Cost {
+            get {
+                return this.CostField;
+            }
+            set {
+                if ((this.CostField.Equals(value) != true)) {
+                    this.CostField = value;
+                    this.RaisePropertyChanged("Cost");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Specialty {
+            get {
+                return this.SpecialtyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SpecialtyField, value) != true)) {
+                    this.SpecialtyField = value;
+                    this.RaisePropertyChanged("Specialty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid WorkerId {
+            get {
+                return this.WorkerIdField;
+            }
+            set {
+                if ((this.WorkerIdField.Equals(value) != true)) {
+                    this.WorkerIdField = value;
+                    this.RaisePropertyChanged("WorkerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkerName {
+            get {
+                return this.WorkerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkerNameField, value) != true)) {
+                    this.WorkerNameField = value;
+                    this.RaisePropertyChanged("WorkerName");
                 }
             }
         }
@@ -276,15 +369,92 @@ namespace WebApp.WorkerServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkerObject", Namespace="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model")]
+    [System.SerializableAttribute()]
+    public partial class WorkerObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WorkerCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid WorkerObjectIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WorkerCount {
+            get {
+                return this.WorkerCountField;
+            }
+            set {
+                if ((this.WorkerCountField.Equals(value) != true)) {
+                    this.WorkerCountField = value;
+                    this.RaisePropertyChanged("WorkerCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid WorkerObjectId {
+            get {
+                return this.WorkerObjectIdField;
+            }
+            set {
+                if ((this.WorkerObjectIdField.Equals(value) != true)) {
+                    this.WorkerObjectIdField = value;
+                    this.RaisePropertyChanged("WorkerObjectId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WorkerServiceReference.IWorkerWcfService")]
     public interface IWorkerWcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateShiftResponse")]
-        void CreateShift(WebApp.WorkerServiceReference.Shift shift);
+        void CreateShift(WebApp.WorkerServiceReference.ShiftDto shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateShiftResponse")]
-        System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.Shift shift);
+        System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.ShiftDto shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/CreateWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/CreateWorkerResponse")]
         void CreateWorker(WebApp.WorkerServiceReference.Worker worker);
@@ -317,46 +487,46 @@ namespace WebApp.WorkerServiceReference {
         System.Threading.Tasks.Task DeleteWorkerObjectAsync(System.Guid workerObjectId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShifts", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftsResponse")]
-        WebApp.WorkerServiceReference.Shift[] GetShifts();
+        System.Collections.Generic.List<WebApp.WorkerServiceReference.ShiftDto> GetShifts();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShifts", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftsResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift[]> GetShiftsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.ShiftDto>> GetShiftsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjects", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectsResponse")]
-        WebApp.WorkerServiceReference.WorkerObject[] GetWorkerObjects();
+        System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerObjectDto> GetWorkerObjects();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObjects", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectsResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject[]> GetWorkerObjectsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerObjectDto>> GetWorkerObjectsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkers", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkersResponse")]
-        WebApp.WorkerServiceReference.Worker[] GetWorkers();
+        System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto> GetWorkers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkers", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkersResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto>> GetWorkersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShift", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftResponse")]
-        WebApp.WorkerServiceReference.Shift GetShift(System.Guid shiftId);
+        WebApp.WorkerServiceReference.ShiftDto GetShift(System.Guid shiftId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetShift", ReplyAction="http://tempuri.org/IWorkerWcfService/GetShiftResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift> GetShiftAsync(System.Guid shiftId);
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.ShiftDto> GetShiftAsync(System.Guid shiftId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectResponse")]
-        WebApp.WorkerServiceReference.WorkerObject GetWorkerObject(System.Guid workerObjectId);
+        WebApp.WorkerServiceReference.WorkerObjectDto GetWorkerObject(System.Guid workerObjectId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorkerObject", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerObjectResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject> GetWorkerObjectAsync(System.Guid workerObjectId);
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObjectDto> GetWorkerObjectAsync(System.Guid workerObjectId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerResponse")]
-        WebApp.WorkerServiceReference.Worker GetWorker(System.Guid workerId);
+        WebApp.WorkerServiceReference.WorkerDto GetWorker(System.Guid workerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/GetWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/GetWorkerResponse")]
-        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker> GetWorkerAsync(System.Guid workerId);
+        System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerDto> GetWorkerAsync(System.Guid workerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse")]
-        void UpdateShift(WebApp.WorkerServiceReference.Shift shift);
+        void UpdateShift(WebApp.WorkerServiceReference.ShiftDto shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateShift", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateShiftResponse")]
-        System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.Shift shift);
+        System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.ShiftDto shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWorkerWcfService/UpdateWorker", ReplyAction="http://tempuri.org/IWorkerWcfService/UpdateWorkerResponse")]
         void UpdateWorker(WebApp.WorkerServiceReference.Worker worker);
@@ -398,11 +568,11 @@ namespace WebApp.WorkerServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateShift(WebApp.WorkerServiceReference.Shift shift) {
+        public void CreateShift(WebApp.WorkerServiceReference.ShiftDto shift) {
             base.Channel.CreateShift(shift);
         }
         
-        public System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.Shift shift) {
+        public System.Threading.Tasks.Task CreateShiftAsync(WebApp.WorkerServiceReference.ShiftDto shift) {
             return base.Channel.CreateShiftAsync(shift);
         }
         
@@ -446,59 +616,59 @@ namespace WebApp.WorkerServiceReference {
             return base.Channel.DeleteWorkerObjectAsync(workerObjectId);
         }
         
-        public WebApp.WorkerServiceReference.Shift[] GetShifts() {
+        public System.Collections.Generic.List<WebApp.WorkerServiceReference.ShiftDto> GetShifts() {
             return base.Channel.GetShifts();
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift[]> GetShiftsAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.ShiftDto>> GetShiftsAsync() {
             return base.Channel.GetShiftsAsync();
         }
         
-        public WebApp.WorkerServiceReference.WorkerObject[] GetWorkerObjects() {
+        public System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerObjectDto> GetWorkerObjects() {
             return base.Channel.GetWorkerObjects();
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject[]> GetWorkerObjectsAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerObjectDto>> GetWorkerObjectsAsync() {
             return base.Channel.GetWorkerObjectsAsync();
         }
         
-        public WebApp.WorkerServiceReference.Worker[] GetWorkers() {
+        public System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto> GetWorkers() {
             return base.Channel.GetWorkers();
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker[]> GetWorkersAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WebApp.WorkerServiceReference.WorkerDto>> GetWorkersAsync() {
             return base.Channel.GetWorkersAsync();
         }
         
-        public WebApp.WorkerServiceReference.Shift GetShift(System.Guid shiftId) {
+        public WebApp.WorkerServiceReference.ShiftDto GetShift(System.Guid shiftId) {
             return base.Channel.GetShift(shiftId);
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Shift> GetShiftAsync(System.Guid shiftId) {
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.ShiftDto> GetShiftAsync(System.Guid shiftId) {
             return base.Channel.GetShiftAsync(shiftId);
         }
         
-        public WebApp.WorkerServiceReference.WorkerObject GetWorkerObject(System.Guid workerObjectId) {
+        public WebApp.WorkerServiceReference.WorkerObjectDto GetWorkerObject(System.Guid workerObjectId) {
             return base.Channel.GetWorkerObject(workerObjectId);
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObject> GetWorkerObjectAsync(System.Guid workerObjectId) {
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerObjectDto> GetWorkerObjectAsync(System.Guid workerObjectId) {
             return base.Channel.GetWorkerObjectAsync(workerObjectId);
         }
         
-        public WebApp.WorkerServiceReference.Worker GetWorker(System.Guid workerId) {
+        public WebApp.WorkerServiceReference.WorkerDto GetWorker(System.Guid workerId) {
             return base.Channel.GetWorker(workerId);
         }
         
-        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.Worker> GetWorkerAsync(System.Guid workerId) {
+        public System.Threading.Tasks.Task<WebApp.WorkerServiceReference.WorkerDto> GetWorkerAsync(System.Guid workerId) {
             return base.Channel.GetWorkerAsync(workerId);
         }
         
-        public void UpdateShift(WebApp.WorkerServiceReference.Shift shift) {
+        public void UpdateShift(WebApp.WorkerServiceReference.ShiftDto shift) {
             base.Channel.UpdateShift(shift);
         }
         
-        public System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.Shift shift) {
+        public System.Threading.Tasks.Task UpdateShiftAsync(WebApp.WorkerServiceReference.ShiftDto shift) {
             return base.Channel.UpdateShiftAsync(shift);
         }
         

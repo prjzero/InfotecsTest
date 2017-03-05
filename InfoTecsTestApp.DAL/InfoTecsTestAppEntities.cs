@@ -28,6 +28,35 @@ namespace InfoTecsTestApp.DAL
             modelBuilder.Configurations.Add(new WorkerConfiguration());
             modelBuilder.Configurations.Add(new WorkerObjectConfiguration());
             modelBuilder.Configurations.Add(new ShiftConfiguration());
+
+            //modelBuilder.Entity<Shift>()
+            //    .HasMany(s => s.ShiftWorkers)
+            //    .WithMany(w => w.WorkerShifts)
+            //    .Map(m =>
+            //    {
+            //        m.MapLeftKey("ShiftId");
+            //        m.MapRightKey("WorkerId");
+            //        m.ToTable("ShiftWorkers");
+            //    });
+
+            //modelBuilder.Entity<WorkerObject>()
+            //.HasMany(wo => wo.Shifts)
+            //.WithOptional()
+            //.HasForeignKey(s => s.ShiftId);
+
+            modelBuilder.Entity<WorkerObject>()
+            .HasMany(p => p.Shifts)
+            .WithRequired(p => p.WorkerObject);
+
+            modelBuilder.Entity<Worker>()
+                .HasMany(s => s.WorkerShifts)
+                .WithMany(c => c.ShiftWorkers);
+            //.Map(cs =>
+            //{
+            //    cs.MapLeftKey("StudentRefId");
+            //    cs.MapRightKey("CourseRefId");
+            //    cs.ToTable("ShiftWorkers");
+            //});
         }
     }
 }

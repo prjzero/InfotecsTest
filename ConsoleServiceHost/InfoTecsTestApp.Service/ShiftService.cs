@@ -55,6 +55,8 @@ namespace InfoTecsTestApp.Service
 
         private void ValidateShift(Shift shift)
         {
+            if (shift.ShiftWorkers == null || shift.ShiftWorkers.Count < 1)
+                throw new Exception("В каждой смене должен быть минимум 1 рабочий");
             //if (shift.Workers <= 0)
             //    throw new Exception("Зарплата должна быть больше 0");
             //if (_shiftRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))

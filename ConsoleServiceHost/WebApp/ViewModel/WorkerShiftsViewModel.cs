@@ -8,8 +8,8 @@ namespace WebApp.ViewModel
 {
     public class WorkerShiftsViewModel
     {
-        public Shift[] Shifts { get; set; }
-        public Worker[] Workers { get; set; }
-        public WorkerObject[] WorkerObjects { get; set; }
+        public List<ShiftDto> Shifts { get; set; }
+        public List<WorkerDto> Workers { get; set; }
+        public List<WorkerObjectDto> WorkerObjects { get; set; }
     }
 }

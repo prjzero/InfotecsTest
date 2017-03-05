@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using AutoMapper;
 using InfoTecsTestApp.DAL.Infrastructure;
 using InfoTecsTestApp.DAL.Repository;
 using InfoTecsTestApp.Model;
@@ -17,31 +18,45 @@ namespace WCFService
         private readonly IWorkerService _workerService;
         private readonly IWorkerObjectService _workerObjectService;
         private readonly IShiftService _shiftService;
+        private readonly IMapper _mapper;
         public WorkerWcfService(IWorkerService workerService, IWorkerObjectService workerObjectService, IShiftService shiftService)
         {
             _workerService = workerService;
             _workerObjectService = workerObjectService;
             _shiftService = shiftService;
+            //var config = new MapperConfiguration(cfg => {
+            //    cfg.CreateMap<Shift, ShiftDto>();
+            //    cfg.CreateMap<WorkerObject, WorkerObjectDto>();
+            //});
+            //config.AssertConfigurationIsValid();
+            //_mapper = config.CreateMapper();
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Worker, WorkerDto>();
+                cfg.CreateMap<WorkerObject, WorkerObjectDto>();
+                cfg.CreateMap<Shift, ShiftDto>();
+            });
         }
         
-        public IEnumerable<Worker> GetWorkers()
+        public IEnumerable<WorkerDto> GetWorkers()
         {
-            return _workerService.GetAll();
+            return _workerService.GetAll().Select(Mapper.Map<WorkerDto>);
         }
 
-        public Shift GetShift(Guid shiftId)
+        public ShiftDto GetShift(Guid shiftId)
         {
-            return _shiftService.Get(shiftId);
+            return Mapper.Map<ShiftDto>(_shiftService.Get(shiftId)); 
         }
 
-        public WorkerObject GetWorkerObject(Guid workerObjectId)
+        public WorkerObjectDto GetWorkerObject(Guid workerObjectId)
         {
-            return _workerObjectService.Get(workerObjectId);
+            return Mapper.Map<WorkerObjectDto>(_workerObjectService.Get(workerObjectId));
         }
 
-        public Worker GetWorker(Guid workerId)
+        public WorkerDto GetWorker(Guid workerId)
         {
-            return _workerService.Get(workerId);
+            return Mapper.Map<WorkerDto>(_workerService.Get(workerId));
         }
 
         public void CreateWorker(Worker worker)
@@ -58,9 +73,11 @@ namespace WCFService
             _workerService.Delete(workerId);
         }
 
-        public IEnumerable<WorkerObject> GetWorkerObjects()
+        public IEnumerable<WorkerObjectDto> GetWorkerObjects()
         {
-            return _workerObjectService.GetAll(); ;
+            var aaa = _workerObjectService.GetAll();
+            //var mapped = Mapper.Map<WorkerObjectDto>(aaa);
+            return _workerObjectService.GetAll().Select(Mapper.Map<WorkerObjectDto>); 
         }
 
         public void CreateWorkerObject(WorkerObject workerObject)
@@ -79,19 +96,47 @@ namespace WCFService
             _workerObjectService.Delete(workerObjectId);
         }
 
-        public IEnumerable<Shift> GetShifts()
+        public IEnumerable<ShiftDto> GetShifts()
         {
-            return _shiftService.GetAll();
+            var aaa = _shiftService.GetAll().ToList();
+            var bbb = _shiftService.GetAll().Select(Mapper.Map<ShiftDto>).ToList();
+            return _shiftService.GetAll().Select(Mapper.Map<ShiftDto>);
         }
 
-        public void CreateShift(Shift shift)
+        public void CreateShift(ShiftDto shift)
         {
-            _shiftService.Create(shift);
+            WorkerObject wo = null;
+            ICollection<Worker> ws = null;
+            if (shift.WorkerObject != null)
+                wo = _workerObjectService.Get(shift.WorkerObject.WorkerObjectId);
+            if (shift.ShiftWorkers != null && shift.ShiftWorkers.Count > 0)
+                ws = _workerService.GetAll().Where(w => shift.ShiftWorkers.Any(wst => wst.WorkerId == w.WorkerId)).ToList();
+            var tShift = new Shift()
+            {
+                ShiftId = shift.ShiftId,
+                ShiftDate = shift.ShiftDate,
+                WorkerObject = wo,
+                ShiftWorkers = ws
+            };
+            _shiftService.Create(tShift);
         }
 
-        public void UpdateShift(Shift shift)
+        public void UpdateShift(ShiftDto shift)
         {
-            _shiftService.Update(shift);
+            WorkerObject wo = null;
+            ICollection<Worker> ws = null;
+            if (shift.WorkerObject != null)
+                wo = _workerObjectService.Get(shift.WorkerObject.WorkerObjectId);
+            if (shift.ShiftWorkers != null && shift.ShiftWorkers.Count > 0)
+                ws = _workerService.GetAll().Where(w => shift.ShiftWorkers.Any(wst => wst.WorkerId == w.WorkerId)).ToList();
+            var tShift = new Shift()
+            {
+                ShiftId = shift.ShiftId,
+                ShiftDate = shift.ShiftDate,
+                WorkerObject = wo,
+                ShiftWorkers = ws
+            };
+            _shiftService.Update(tShift);
         }
         public void DeleteShift(Guid shiftId)
         {

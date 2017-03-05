@@ -318,16 +318,16 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\npm.js" />
-    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.Worker.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.WorkerObject.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.Shift.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.WorkerDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.ShiftDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\WorkerServiceReference\WebApp.WorkerServiceReference.WorkerObjectDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\WorkerServiceReference\WorkerService.disco" />
     <None Include="Service References\WorkerServiceReference\configuration91.svcinfo" />
     <None Include="Service References\WorkerServiceReference\configuration.svcinfo" />

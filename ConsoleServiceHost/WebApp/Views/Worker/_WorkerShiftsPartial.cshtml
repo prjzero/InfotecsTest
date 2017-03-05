@@ -18,7 +18,10 @@
         <tr shiftid="@item.shift.ShiftId">
             <td>@(item.index + 1)</td>
             <td class="workerObject">@item.shift.WorkerObject.Address</td>
-            <td class="workers">@string.Join(",  ", item.shift.Workers.Select(w => w.WorkerName))</td>
+            <td class="workers">
+                @string.Join(",  ", item.shift.ShiftWorkers.Select(w => w.WorkerName))
+                <input type="hidden" class="workersVals" value='@string.Join(",", item.shift.ShiftWorkers.Select(w => $"{ w.WorkerName}"))'/>
+            </td>
             <td class="shiftDate">@item.shift.ShiftDate.ToShortDateString()</td>
             <td>
                 <button type="button" class="btn btn-info editShift">Редактировать</button>
@@ -88,15 +91,20 @@
             data: { 'shiftId': shiftId },
             url: '@Url.Action("DeleteShift", "Worker")',
             success: function (msg) {
-                //alert(msg);
+                if (msg.Status !== 'OK') {
+                    alert(msg.Message);
+                    return;
+                }
                 shiftsRefrash();
             }
         });
     });
     $("#shiftTable tbody .editShift").click(function () {
-        //$("#shiftIdValue").val($(this).closest('tr').attr("shiftid"));
-        //$("#AddressEdit").val($(this).closest('tr').find(".address").text());
-        //$("#WorkerCountEdit").val($(this).closest('tr').find(".workerCount").text());
+        var as = $(this).closest('tr').find(".workersVals").val().split(',');
+        var s = JSON.parse("[" + $(this).closest('tr').find(".workersVals").val().split(',') + "]");
+        $("#workerObjectSelect").selectpicker('val', []);
+        $("#workersSelect").selectpicker('val', JSON.parse("[" + $(this).closest('tr').find(".workersVals").val().split(',') + "]"));
+        $("#shiftDateEdit input").val($(this).closest('tr').find(".shiftDate").text());
         $("#shiftTable tfoot").show();
     });
     $("#addNewShiftBtn").click(function() {
@@ -148,6 +156,9 @@
         $("#shiftTable tfoot").hide();
     });
     function ClearShiftEdit() {
+        $("#workerObjectSelect").selectpicker('val', []);
+        $("#workersSelect").selectpicker('val', []);
+        $("#shiftDateEdit input").val("");
         //$("#shiftIdValue").val("");
         //$("#AddressEdit").val("");
         //$("#WorkerCountEdit").val("");
@@ -156,7 +167,7 @@
     function shiftsRefrash() {
         $.ajax({
             type: "Get",
-            url: '@Url.Action("ShiftsPartial", "Worker")',
+            url: '@Url.Action("WorkerShiftsPartial", "Worker")',
             success: function (res) {
                 $("#shifts").html(res);
             },

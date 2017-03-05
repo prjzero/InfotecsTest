@@ -5,7 +5,7 @@
   <xs:element name="CreateShift">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="shift" nillable="true" type="q1:Shift" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="shift" nillable="true" type="q1:ShiftDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -82,7 +82,7 @@
   <xs:element name="GetShiftsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetShiftsResult" nillable="true" type="q7:ArrayOfShift" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetShiftsResult" nillable="true" type="q7:ArrayOfShiftDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,7 +94,7 @@
   <xs:element name="GetWorkerObjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerObjectsResult" nillable="true" type="q8:ArrayOfWorkerObject" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerObjectsResult" nillable="true" type="q8:ArrayOfWorkerObjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -106,7 +106,7 @@
   <xs:element name="GetWorkersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkersResult" nillable="true" type="q9:ArrayOfWorker" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkersResult" nillable="true" type="q9:ArrayOfWorkerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -120,7 +120,7 @@
   <xs:element name="GetShiftResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetShiftResult" nillable="true" type="q11:Shift" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetShiftResult" nillable="true" type="q11:ShiftDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,7 +134,7 @@
   <xs:element name="GetWorkerObjectResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerObjectResult" nillable="true" type="q13:WorkerObject" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerObjectResult" nillable="true" type="q13:WorkerObjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,14 +148,14 @@
   <xs:element name="GetWorkerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerResult" nillable="true" type="q15:Worker" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="GetWorkerResult" nillable="true" type="q15:WorkerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateShift">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="shift" nillable="true" type="q16:Shift" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/InfoTecsTestApp.Model" minOccurs="0" name="shift" nillable="true" type="q16:ShiftDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

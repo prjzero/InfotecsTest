@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -28,7 +29,7 @@ namespace InfoTecsTestApp.DAL.Infrastructure
         }
         public virtual void Add(T entity)
         {
-            dbset.Add(entity);
+            dbset.AddOrUpdate(entity);
         }
         public virtual void Update(T entity)
         {

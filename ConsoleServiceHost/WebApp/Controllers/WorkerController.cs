@@ -106,6 +106,21 @@ namespace WebApp.Controllers
             return View(workerShiftsViewModel);
         }
 
+        [HttpGet]
+        public ActionResult WorkerShiftsPartial()
+        {
+            var shifts = _workerService.GetShifts();
+            var workers = _workerService.GetWorkers();
+            var workerObjects = _workerService.GetWorkerObjects();
+            var workerShiftsViewModel = new WorkerShiftsViewModel()
+            {
+                Shifts = shifts,
+                Workers = workers,
+                WorkerObjects = workerObjects
+            };
+            return PartialView("_WorkerShiftsPartial", workerShiftsViewModel);
+        }
+
         public ActionResult UpdateShift(string shiftId, string workerObjectId, Guid[] workers, string shiftDate)
         {
             return GetStatusResult(() =>
@@ -115,14 +130,15 @@ namespace WebApp.Controllers
                 Guid workerObjectGuid;
                 Guid.TryParse(workerObjectId, out workerObjectGuid);
                 var requestWorkerObject = _workerService.GetWorkerObject(workerObjectGuid);
+
                 if (workers == null)
                     workers = new Guid[] {};
-                var requestWorkers = _workerService.GetWorkers().Where(w => workers.Contains(w.WorkerId)).ToArray();
+                var requestWorkers = _workerService.GetWorkers().Where(w => workers.Contains(w.WorkerId)).ToList();
 
                 Guid shiftIdGuid;
                 Guid.TryParse(shiftId, out shiftIdGuid);
 
-                var shift = new Shift() { ShiftDate = shiftDateTime, Workers = requestWorkers, WorkerObject = requestWorkerObject, ShiftId = shiftIdGuid };
+                var shift = new ShiftDto() { ShiftDate = shiftDateTime, ShiftWorkers = requestWorkers, WorkerObject = requestWorkerObject, ShiftId = shiftIdGuid };
                 if (shiftIdGuid.Equals(Guid.Empty))
                     _workerService.CreateShift(shift);
                 else
@@ -145,6 +161,15 @@ namespace WebApp.Controllers
             return Json(new { Status = "OK" });
         }
 
-        
+
+        public ActionResult DeleteShift(string shiftId)
+        {
+            return GetStatusResult(() =>
+            {
+                Guid shiftIdGuid;
+                if (Guid.TryParse(shiftId, out shiftIdGuid))
+                    _workerService.DeleteShift(shiftIdGuid);
+            });
+        }
     }
 }
