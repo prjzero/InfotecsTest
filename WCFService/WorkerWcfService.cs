@@ -123,19 +123,18 @@ namespace WCFService
 
         public void UpdateShift(ShiftDto shift)
         {
-            WorkerObject wo = null;
-            ICollection<Worker> ws = null;
+            
+            WorkerObject wo = new WorkerObject();
+            ICollection<Worker> ws = new List<Worker>();
             if (shift.WorkerObject != null)
                 wo = _workerObjectService.Get(shift.WorkerObject.WorkerObjectId);
             if (shift.ShiftWorkers != null && shift.ShiftWorkers.Count > 0)
                 ws = _workerService.GetAll().Where(w => shift.ShiftWorkers.Any(wst => wst.WorkerId == w.WorkerId)).ToList();
-            var tShift = new Shift()
-            {
-                ShiftId = shift.ShiftId,
-                ShiftDate = shift.ShiftDate,
-                WorkerObject = wo,
-                ShiftWorkers = ws
-            };
+            var tShift = _shiftService.Get(shift.ShiftId);
+            tShift.ShiftWorkers.Clear();
+            tShift.ShiftWorkers = ws;
+            tShift.WorkerObject = wo;
+            tShift.ShiftDate = shift.ShiftDate;
             _shiftService.Update(tShift);
         }
         public void DeleteShift(Guid shiftId)

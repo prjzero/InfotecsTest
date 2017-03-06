@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using InfoTecsTestApp.DAL.Infrastructure;
 using InfoTecsTestApp.DAL.Repository;
 using InfoTecsTestApp.Model;
@@ -57,6 +58,15 @@ namespace InfoTecsTestApp.Service
         {
             if (shift.ShiftWorkers == null || shift.ShiftWorkers.Count < 1)
                 throw new Exception("В каждой смене должен быть минимум 1 рабочий");
+            if (shift.ShiftDate.Equals(DateTime.MinValue))
+                throw new Exception("Не указана дата");
+            if (_shiftRepository.GetAll(true)
+                .Any(
+                    w =>
+                        w.ShiftDate == shift.ShiftDate && w.ShiftId != shift.ShiftId &&
+                        w.ShiftWorkers.Any(sw => shift.ShiftWorkers.Any(a => a.WorkerId == sw.WorkerId))))
+                throw new Exception("Рабочий не можнт находиться в нескольких сменах в один день");
+            //if (shift.ShiftWorkers )
             //if (shift.Workers <= 0)
             //    throw new Exception("Зарплата должна быть больше 0");
             //if (_shiftRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))

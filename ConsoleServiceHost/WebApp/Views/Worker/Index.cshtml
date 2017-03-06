@@ -3,11 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Главная</h2>
+<p>
+    @Html.ActionLink("Рабочие", "Workers", null, new {@class = "btn btn-lg btn-default" })
+</p>
+<p>
+    @Html.ActionLink("Объекты", "WorkerObjects", null, new { @class = "btn btn-lg btn-default" })
+</p>
 
-@Html.ActionLink("Рабочие", "Workers")
-<br/>
-@Html.ActionLink("Объекты", "WorkerObjects")
-<br />
-@Html.ActionLink("Смены", "WorkerShifts")
-<br />
+<p>
+    @Html.ActionLink("Смены", "WorkerShifts", null, new { @class = "btn btn-lg btn-default" })
+</p>

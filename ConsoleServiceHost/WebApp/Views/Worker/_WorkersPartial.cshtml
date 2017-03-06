@@ -65,7 +65,10 @@
             data: { 'workerId': workerId },
             url: '@Url.Action("DeleteWorker", "Worker")',
             success: function (msg) {
-                //alert(msg);
+                if (msg.Status !== 'OK') {
+                    alert(msg.Message);
+                    return;
+                }
                 workersRefrash();
             }
         });
