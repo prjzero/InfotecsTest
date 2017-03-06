@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.Web;
 using System.Web.Mvc;
 using WebApp.ViewModel;
 using WebApp.WorkerServiceReference;
@@ -147,6 +144,16 @@ namespace WebApp.Controllers
             
         }
 
+        public ActionResult DeleteShift(string shiftId)
+        {
+            return GetStatusResult(() =>
+            {
+                Guid shiftIdGuid;
+                if (Guid.TryParse(shiftId, out shiftIdGuid))
+                    _workerService.DeleteShift(shiftIdGuid);
+            });
+        }
+
         private ActionResult GetStatusResult(Action process)
         {
             try
@@ -159,17 +166,6 @@ namespace WebApp.Controllers
             }
 
             return Json(new { Status = "OK" });
-        }
-
-
-        public ActionResult DeleteShift(string shiftId)
-        {
-            return GetStatusResult(() =>
-            {
-                Guid shiftIdGuid;
-                if (Guid.TryParse(shiftId, out shiftIdGuid))
-                    _workerService.DeleteShift(shiftIdGuid);
-            });
         }
     }
 }

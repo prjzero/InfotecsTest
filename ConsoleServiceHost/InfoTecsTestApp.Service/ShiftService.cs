@@ -66,11 +66,6 @@ namespace InfoTecsTestApp.Service
                         w.ShiftDate == shift.ShiftDate && w.ShiftId != shift.ShiftId &&
                         w.ShiftWorkers.Any(sw => shift.ShiftWorkers.Any(a => a.WorkerId == sw.WorkerId))))
                 throw new Exception("Рабочий не можнт находиться в нескольких сменах в один день");
-            //if (shift.ShiftWorkers )
-            //if (shift.Workers <= 0)
-            //    throw new Exception("Зарплата должна быть больше 0");
-            //if (_shiftRepository.GetAll(true).Any(w => w.WorkerName == worker.WorkerName && w.WorkerId != worker.WorkerId))
-            //    throw new Exception("Адрес должег быть уникальным");
         }
     }
 }

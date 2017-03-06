@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using Autofac;
-using Autofac.Core;
 using Autofac.Integration.Wcf;
 using InfoTecsTestApp.DAL.Infrastructure;
 using InfoTecsTestApp.DAL.Repository;

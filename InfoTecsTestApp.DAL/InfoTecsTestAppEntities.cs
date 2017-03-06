@@ -2,11 +2,10 @@
 using System.Data.Entity.Infrastructure;
 using InfoTecsTestApp.DAL.Configuration;
 using InfoTecsTestApp.Model;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace InfoTecsTestApp.DAL
 {
-    public class InfoTecsTestAppEntities : DbContext//IdentityDbContext //<ApplicationUser>
+    public class InfoTecsTestAppEntities : DbContext
     {
 
         public InfoTecsTestAppEntities() : base("InfoTecsTestAppEntities")
@@ -29,21 +28,6 @@ namespace InfoTecsTestApp.DAL
             modelBuilder.Configurations.Add(new WorkerObjectConfiguration());
             modelBuilder.Configurations.Add(new ShiftConfiguration());
 
-            //modelBuilder.Entity<Shift>()
-            //    .HasMany(s => s.ShiftWorkers)
-            //    .WithMany(w => w.WorkerShifts)
-            //    .Map(m =>
-            //    {
-            //        m.MapLeftKey("ShiftId");
-            //        m.MapRightKey("WorkerId");
-            //        m.ToTable("ShiftWorkers");
-            //    });
-
-            //modelBuilder.Entity<WorkerObject>()
-            //.HasMany(wo => wo.Shifts)
-            //.WithOptional()
-            //.HasForeignKey(s => s.ShiftId);
-
             modelBuilder.Entity<WorkerObject>()
             .HasMany(p => p.Shifts)
             .WithRequired(p => p.WorkerObject);
@@ -51,12 +35,6 @@ namespace InfoTecsTestApp.DAL
             modelBuilder.Entity<Worker>()
                 .HasMany(s => s.WorkerShifts)
                 .WithMany(c => c.ShiftWorkers);
-            //.Map(cs =>
-            //{
-            //    cs.MapLeftKey("StudentRefId");
-            //    cs.MapRightKey("CourseRefId");
-            //    cs.ToTable("ShiftWorkers");
-            //});
         }
     }
 }

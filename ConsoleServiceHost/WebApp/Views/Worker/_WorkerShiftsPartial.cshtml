@@ -53,8 +53,8 @@
         </td>
         <td>
             <div class="col-xs-10 left">
-                <div class='input-group date' id='shiftDateEdit'>
-                    <input type='text' class="form-control" placeholder="Дата..."/>
+                <div class="input-group date" id="shiftDateEdit">
+                    <input type="text" class="form-control" placeholder="Дата..."/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -109,7 +109,7 @@
             var match = false;
             var optionValue = $(this).val();
             $.each(shiftIdValues, function(index,item) {
-                if (item == optionValue) { match = true;}
+                if (item === optionValue) { match = true;}
             });
             if (match)
                 $(this).prop('selected', true);
@@ -154,7 +154,7 @@
                 $("#shiftTable tfoot").hide();
                 shiftsRefrash();
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 alert('Error during process: \n' + xhr.responseText);
             }
         });
@@ -184,7 +184,7 @@
                 $("#shifts").html(res);
                 ClearShiftEdit();
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 alert('Error during process: \n' + xhr.responseText);
             }
         });

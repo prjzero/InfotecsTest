@@ -1,9 +1,4 @@
 ﻿using System;
-using Autofac;
-using Autofac.Integration.Wcf;
-using InfoTecsTestApp.DAL.Infrastructure;
-using InfoTecsTestApp.DAL.Repository;
-using InfoTecsTestApp.Service;
 
 namespace WCFService
 {

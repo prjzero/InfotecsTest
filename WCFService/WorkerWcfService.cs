@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using AutoMapper;
-using InfoTecsTestApp.DAL.Infrastructure;
-using InfoTecsTestApp.DAL.Repository;
 using InfoTecsTestApp.Model;
 using InfoTecsTestApp.Service;
 
@@ -24,12 +19,6 @@ namespace WCFService
             _workerService = workerService;
             _workerObjectService = workerObjectService;
             _shiftService = shiftService;
-            //var config = new MapperConfiguration(cfg => {
-            //    cfg.CreateMap<Shift, ShiftDto>();
-            //    cfg.CreateMap<WorkerObject, WorkerObjectDto>();
-            //});
-            //config.AssertConfigurationIsValid();
-            //_mapper = config.CreateMapper();
 
             Mapper.Initialize(cfg =>
             {
@@ -75,8 +64,6 @@ namespace WCFService
 
         public IEnumerable<WorkerObjectDto> GetWorkerObjects()
         {
-            var aaa = _workerObjectService.GetAll();
-            //var mapped = Mapper.Map<WorkerObjectDto>(aaa);
             return _workerObjectService.GetAll().Select(Mapper.Map<WorkerObjectDto>); 
         }
 
@@ -98,8 +85,6 @@ namespace WCFService
 
         public IEnumerable<ShiftDto> GetShifts()
         {
-            var aaa = _shiftService.GetAll().ToList();
-            var bbb = _shiftService.GetAll().Select(Mapper.Map<ShiftDto>).ToList();
             return _shiftService.GetAll().Select(Mapper.Map<ShiftDto>);
         }
 
@@ -123,8 +108,7 @@ namespace WCFService
 
         public void UpdateShift(ShiftDto shift)
         {
-            
-            WorkerObject wo = new WorkerObject();
+            var wo = new WorkerObject();
             ICollection<Worker> ws = new List<Worker>();
             if (shift.WorkerObject != null)
                 wo = _workerObjectService.Get(shift.WorkerObject.WorkerObjectId);

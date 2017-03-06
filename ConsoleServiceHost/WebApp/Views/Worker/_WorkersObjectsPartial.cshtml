@@ -1,4 +1,4 @@
-﻿@model  List<WebApp.WorkerServiceReference.WorkerObjectDto>
+﻿@model  IEnumerable<WebApp.WorkerServiceReference.WorkerObjectDto>
 
 <table class="table table-condensed" id="workerObjectTable">
     <thead>
@@ -97,7 +97,7 @@
                 $("#workerObjectTable tfoot").hide();
                 workersRefrash();
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 alert('Error during process: \n' + xhr.responseText);
             }
         });
@@ -121,7 +121,7 @@
             success: function (res) {
                 $("#workers").html(res);
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 alert('Error during process: \n' + xhr.responseText);
             }
         });
