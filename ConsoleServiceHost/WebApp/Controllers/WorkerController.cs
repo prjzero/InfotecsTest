@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using WebApp.ViewModel;
 using WebApp.WorkerServiceReference;
@@ -32,26 +34,26 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateWorker(Worker worker)
+        public async Task<ActionResult> UpdateWorker(Worker worker)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 if (worker.WorkerId.Equals(Guid.Empty))
-                    _workerService.CreateWorker(worker);
+                    await _workerService.CreateWorkerAsync(worker);
                 else
-                    _workerService.UpdateWorker(worker);
-            });
+                    await _workerService.UpdateWorkerAsync(worker);
+            }));
         }
 
         [HttpPost]
-        public ActionResult DeleteWorker(string workerId)
+        public async Task<ActionResult> DeleteWorker(string workerId)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 Guid workerIdGuid;
                 if (Guid.TryParse(workerId, out workerIdGuid))
-                    _workerService.DeleteWorker(workerIdGuid);
-            });
+                    await _workerService.DeleteWorkerAsync(workerIdGuid);
+            }));
         }
 
 
@@ -68,25 +70,25 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateWorkerObject(WorkerObject workerObject)
+        public async Task<ActionResult> UpdateWorkerObject(WorkerObject workerObject)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 if (workerObject.WorkerObjectId.Equals(Guid.Empty))
-                    _workerService.CreateWorkerObject(workerObject);
+                    await _workerService.CreateWorkerObjectAsync(workerObject);
                 else
-                    _workerService.UpdateWorkerObject(workerObject);
-            });
+                    await _workerService.UpdateWorkerObjectAsync(workerObject);
+            }));
         }
         [HttpPost]
-        public ActionResult DeleteWorkerObject(string workerObjectId)
+        public async Task<ActionResult> DeleteWorkerObject(string workerObjectId)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 Guid workerObjectIdGuid;
                 if (Guid.TryParse(workerObjectId, out workerObjectIdGuid))
-                    _workerService.DeleteWorkerObject(workerObjectIdGuid);
-            });
+                    await _workerService.DeleteWorkerObjectAsync(workerObjectIdGuid);
+            }));
         }
 
         public ActionResult WorkerShifts()
@@ -118,47 +120,47 @@ namespace WebApp.Controllers
             return PartialView("_WorkerShiftsPartial", workerShiftsViewModel);
         }
 
-        public ActionResult UpdateShift(string shiftId, string workerObjectId, Guid[] workers, string shiftDate)
+        public async Task<ActionResult> UpdateShift(string shiftId, string workerObjectId, Guid[] workers, string shiftDate)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 DateTime shiftDateTime;
                 DateTime.TryParse(shiftDate, out shiftDateTime);
                 Guid workerObjectGuid;
                 Guid.TryParse(workerObjectId, out workerObjectGuid);
-                var requestWorkerObject = _workerService.GetWorkerObject(workerObjectGuid);
+                var requestWorkerObject = await _workerService.GetWorkerObjectAsync(workerObjectGuid);
 
                 if (workers == null)
                     workers = new Guid[] {};
-                var requestWorkers = _workerService.GetWorkers().Where(w => workers.Contains(w.WorkerId)).ToList();
+                var requestWorkers = (await _workerService.GetWorkersAsync()).Where(w => workers.Contains(w.WorkerId)).ToList();
 
                 Guid shiftIdGuid;
                 Guid.TryParse(shiftId, out shiftIdGuid);
 
                 var shift = new ShiftDto() { ShiftDate = shiftDateTime, ShiftWorkers = requestWorkers, WorkerObject = requestWorkerObject, ShiftId = shiftIdGuid };
                 if (shiftIdGuid.Equals(Guid.Empty))
-                    _workerService.CreateShift(shift);
+                    await _workerService.CreateShiftAsync(shift);
                 else
-                    _workerService.UpdateShift(shift);
-            });
-            
+                    await _workerService.UpdateShiftAsync(shift);
+            }));
+
         }
 
-        public ActionResult DeleteShift(string shiftId)
+        public async Task<ActionResult> DeleteShift(string shiftId)
         {
-            return GetStatusResult(() =>
+            return await GetStatusResultAsync(Task.Run(async () =>
             {
                 Guid shiftIdGuid;
                 if (Guid.TryParse(shiftId, out shiftIdGuid))
-                    _workerService.DeleteShift(shiftIdGuid);
-            });
+                    await _workerService.DeleteShiftAsync(shiftIdGuid);
+            }));
         }
 
-        private ActionResult GetStatusResult(Action process)
+        private async Task<ActionResult> GetStatusResultAsync(Task process)
         {
             try
             {
-                process();
+                await process;
             }
             catch (Exception exception)
             {
