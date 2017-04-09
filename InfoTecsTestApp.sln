@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.ConsoleServiceHost", "InfoTecsTestApp.ConsoleServiceHost.csproj", "{71C45448-46C0-4336-A096-ECB835CF6CC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.ConsoleServiceHost", "ConsoleServiceHost\InfoTecsTestApp.ConsoleServiceHost.csproj", "{71C45448-46C0-4336-A096-ECB835CF6CC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.WCFService", "..\WCFService\InfoTecsTestApp.WCFService.csproj", "{AE50F0EB-9F18-4F64-9886-C0FC8ED75FE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.WCFService", "WCFService\InfoTecsTestApp.WCFService.csproj", "{AE50F0EB-9F18-4F64-9886-C0FC8ED75FE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.WebApp", "WebApp\InfoTecsTestApp.WebApp.csproj", "{7E3A851F-B86A-434A-A943-CA06663F8D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.DAL", "..\InfoTecsTestApp.DAL\InfoTecsTestApp.DAL.csproj", "{DC4BC79F-38C7-47FA-A7DA-C2CB6DA3378A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.DAL", "InfoTecsTestApp.DAL\InfoTecsTestApp.DAL.csproj", "{DC4BC79F-38C7-47FA-A7DA-C2CB6DA3378A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoTecsTestApp.Model", "InfoTecsTestApp.Model\InfoTecsTestApp.Model.csproj", "{D561FB8F-2845-4259-B87E-65FB38216584}"
 EndProject

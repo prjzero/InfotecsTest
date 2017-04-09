@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\InfoTecsTestApp.DAL\InfoTecsTestApp.DAL.csproj">
+    <ProjectReference Include="..\InfoTecsTestApp.DAL\InfoTecsTestApp.DAL.csproj">
       <Project>{dc4bc79f-38c7-47fa-a7da-c2cb6da3378a}</Project>
       <Name>InfoTecsTestApp.DAL</Name>
     </ProjectReference>

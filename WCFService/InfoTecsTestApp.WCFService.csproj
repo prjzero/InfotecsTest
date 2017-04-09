@@ -80,11 +80,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleServiceHost\InfoTecsTestApp.Model\InfoTecsTestApp.Model.csproj">
+    <ProjectReference Include="..\InfoTecsTestApp.Model\InfoTecsTestApp.Model.csproj">
       <Project>{d561fb8f-2845-4259-b87e-65fb38216584}</Project>
       <Name>InfoTecsTestApp.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConsoleServiceHost\InfoTecsTestApp.Service\InfoTecsTestApp.Service.csproj">
+    <ProjectReference Include="..\InfoTecsTestApp.Service\InfoTecsTestApp.Service.csproj">
       <Project>{5d7adba4-d412-43ce-adf1-b8ab4eb0b907}</Project>
       <Name>InfoTecsTestApp.Service</Name>
     </ProjectReference>
